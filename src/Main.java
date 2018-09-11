@@ -1,11 +1,18 @@
 import javax.swing.*;
 
-public class Main {
+public class Main extends JFrame {
 
-    JButton button1;
+    Main(){
+        setSize(300,300);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+
+    }
 
 
     public static void main(String[] args) {
-        System.out.println("Hello Calculator!");
+
+
+
     }
 }
