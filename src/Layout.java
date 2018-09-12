@@ -14,6 +14,7 @@ public class Layout extends JFrame {
 
     public Layout(String name) {
         super(name);
+        super.setLayout(new GridLayout(0,1));
         setResizable(true);
     }
 
@@ -21,14 +22,30 @@ public class Layout extends JFrame {
 //        final JPanel components = new JPanel();
 //        components.setLayout(layout);
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(0,3));
+        panel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
 
-        //Add buttons to experiment with Grid Layout
-        panel.add(textfield = new JTextField());
-        pane.add(new JSeparator(), BorderLayout.CENTER);
+        //Add buttons
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        panel.add(textfield = new JTextField(3), gbc);
+//        pane.add(new JSeparator(), BorderLayout.CENTER);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
         panel.add(button1 = new JButton("1"));
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 1;
         panel.add(button2 = new JButton("2"));
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 2;
         panel.add(button3 = new JButton("3"));
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 2;
+        gbc.gridy = 0;
         panel.add(button4 = new JButton("4"));
         panel.add(button5 = new JButton("5"));
         panel.add(button6 = new JButton("6"));
