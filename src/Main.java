@@ -1,18 +1,18 @@
 import javax.swing.*;
+import java.awt.*;
 
-public class Main extends JFrame {
+public class Main {
 
-    Main(){
-        setSize(300,300);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-
-    }
-
-
+    static JTextField textfield1, textfield2, textfield3;
     public static void main(String[] args) {
+        Layout layout = new Layout("Kalkulator");
 
-        System.out.println("Branch");
-
+//        Example layout = new Example("GridLayoutDemo");
+        layout.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //Set up the content pane.
+        layout.addComponentsToPane(layout.getContentPane());
+        //Display the window.
+        layout.pack();
+        layout.setVisible(true);
     }
 }
