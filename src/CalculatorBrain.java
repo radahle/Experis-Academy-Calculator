@@ -2,7 +2,7 @@ import javax.swing.*;
 
 public class CalculatorBrain {
 
-    String numberStream = new String();
+    private String numberStream = new String();
     private final byte MAX_INT=9;
     private int[] numbers = new int[2];
     private int counter = 0;
@@ -103,7 +103,7 @@ public class CalculatorBrain {
                 output  =   subtract();
                 break;
             case DIVIDE:
-                output = divide();
+                output  =   divide();
                 break;
         }
 
@@ -116,6 +116,7 @@ public class CalculatorBrain {
 
             case EQUALS:
                 output = Integer.toString(calculate(lastType));
+                clear();
                 break;
             case CLEAR:
                 clear();
