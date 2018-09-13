@@ -32,7 +32,7 @@ public class CalculatorFrame extends JFrame implements ActionListener{
         createButtons();
         setLayout();
         setVisible(true);
-        screen.setText("CLEAR");
+        screen.setText("");
         screen.setHorizontalAlignment(JTextField.CENTER);
     }
 
@@ -78,7 +78,7 @@ public class CalculatorFrame extends JFrame implements ActionListener{
         // Numbers 0-9
         JButton button;
         for(int i=0;i<10;i++){
-            button= new IntButton(Integer.toString(i));
+            button= new NumberButton(Integer.toString(i));
             button.addActionListener(this);
             numberButtons.add(button);
         }
@@ -107,7 +107,9 @@ public class CalculatorFrame extends JFrame implements ActionListener{
         Object source = actionEvent.getSource();
 
         if (source instanceof JButton){
-            screen.setText(calcBrain.update((JButton) source));
+                screen.setText(calcBrain.update((JButton) source));
+
+
         }
 
 
