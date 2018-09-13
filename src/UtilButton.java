@@ -1,7 +1,7 @@
 import javax.swing.*;
 
 public class UtilButton extends JButton {
-    public enum UTILITY_TYPE{EQUALS,CLEAR,M_PLUSS,M_MINUS}
+    public enum UTILITY_TYPE{EQUALS,CLEAR,M_PLUSS,M_MINUS, M_CLEAR, M_RECALL}
 
     public UTILITY_TYPE getType() {
         return type;
@@ -27,8 +27,12 @@ public class UtilButton extends JButton {
             case M_MINUS:
                 this.setText("M-");
                 break;
+            case M_CLEAR:
+                this.setText("MC");
+                break;
+            case M_RECALL:
+                this.setText("MR");
+                break;
         }
     }
-
-
 }

@@ -7,6 +7,7 @@ public class CalculatorBrain {
     private int[] numbers = new int[2];
     private int counter = 0;
     private OperatorButton.OPERATOR_TYPE lastType;
+    private int memory = 0;
 
     public CalculatorBrain(){}
 
@@ -87,6 +88,22 @@ public class CalculatorBrain {
         return numbers[0];
     }
 
+    public void addToMemory() {
+
+    }
+
+    public void subtractFromMemory() {
+
+    }
+
+    public void clearMemory() {
+
+    }
+
+    public int recallFromMemory() {
+        return 0;
+    }
+
     public int calculate(OperatorButton.OPERATOR_TYPE type){
 
         int output=0;
@@ -120,6 +137,18 @@ public class CalculatorBrain {
                 break;
             case CLEAR:
                 clear();
+                break;
+            case M_PLUSS:
+                addToMemory();
+                break;
+            case M_MINUS:
+                subtractFromMemory();
+                break;
+            case M_CLEAR:
+                clearMemory();
+                break;
+            case M_RECALL:
+                recallFromMemory();
                 break;
         }
 
