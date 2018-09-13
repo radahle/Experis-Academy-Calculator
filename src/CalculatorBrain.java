@@ -7,22 +7,21 @@ public class CalculatorBrain {
     private int[] numbers = new int[2];
     private int counter = 0;
     private OperatorButton.OPERATOR_TYPE lastType;
-    private int memory = 0;
+    private float memory = 0f;
+    private String output = "";
 
     public CalculatorBrain(){}
 
     //Main method which connects BackEnd to FrontEnd
     public String update(JButton button){
-        String output = "";
+//        output = "";
 
         if (button instanceof IntButton){
             // check if it is a number
             if(numberStream.length()<MAX_INT) numberStream+=((IntButton) button).getInteger();
-            System.out.println(counter);
             numbers[counter] = Integer.parseInt(numberStream);
-            System.out.println(numbers[0] + " " +numbers[1] + " " + counter);
+            System.out.println(numbers[0] + " " +numbers[1] + " " + counter + " Memory: " + memory);
             output = Integer.toString(numbers[counter]);
-
 
          }
          else if (button instanceof OperatorButton){
@@ -32,7 +31,7 @@ public class CalculatorBrain {
              numberStream="";
              output=Integer.toString(numbers[0]);
 
-             if (counter==1){
+             if (counter==1 && lastType != null){
                  calculate(lastType);
              }
              else if (counter==0){
@@ -42,10 +41,7 @@ public class CalculatorBrain {
 
 
          } else if (button instanceof UtilButton) {
-             output =   utilAction(((UtilButton) button).getType());
-
-
-
+             output = utilAction(((UtilButton) button).getType());
         }
 
          return output;
@@ -89,26 +85,28 @@ public class CalculatorBrain {
     }
 
     public void addToMemory() {
-
+        memory += Float.parseFloat(output);
     }
 
     public void subtractFromMemory() {
-
+        memory -= Float.parseFloat(output);
     }
 
     public void clearMemory() {
-
+        memory = 0f;
     }
 
-    public int recallFromMemory() {
-        return 0;
+    public float recallFromMemory() {
+        numbers[0] = (int)memory;
+        counter = 1;
+        return memory;
     }
 
     public int calculate(OperatorButton.OPERATOR_TYPE type){
 
         int output=0;
 
-        switch (lastType){
+        switch (type){
 
             case ADD:
                 output  =   add();
@@ -132,14 +130,21 @@ public class CalculatorBrain {
         switch (type){
 
             case EQUALS:
-                output = Integer.toString(calculate(lastType));
-                clear();
+                if(counter == 1) {
+                    output = Integer.toString(calculate(lastType));
+                    numbers[0] = 0;
+                    numbers[1] = 0;
+                    counter = 0;
+                    numberStream = "";
+                    lastType = null;
+                }
                 break;
             case CLEAR:
                 clear();
                 break;
             case M_PLUSS:
                 addToMemory();
+                numberStream = "";
                 break;
             case M_MINUS:
                 subtractFromMemory();
@@ -148,7 +153,7 @@ public class CalculatorBrain {
                 clearMemory();
                 break;
             case M_RECALL:
-                recallFromMemory();
+                output = Float.toString(recallFromMemory());
                 break;
         }
 
