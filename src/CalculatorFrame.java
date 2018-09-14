@@ -18,8 +18,8 @@ public class CalculatorFrame extends JFrame implements ActionListener{
     private CalculatorBrain calcBrain= new CalculatorBrain();
 
 
-    private final short WIDTH_CONST =300;
-    private final short HEIGHT_CONST =500;
+    private final short WIDTH_CONST =350;
+    private final short HEIGHT_CONST =450;
 
     public CalculatorFrame(){
         setSize(WIDTH_CONST,HEIGHT_CONST);
@@ -31,31 +31,90 @@ public class CalculatorFrame extends JFrame implements ActionListener{
         //Create Components
         createButtons();
         setLayout();
+
         setVisible(true);
-        screen.setText("");
-        screen.setHorizontalAlignment(JTextField.CENTER);
+        screen.setText("0");
+        screen.setPreferredSize(new Dimension(350,100));
+        screen.setBackground(Color.GRAY);
+        screen.setHorizontalAlignment(JTextField.RIGHT);
     }
 
     public void setLayout(){
+
         container = new JPanel();
-        container.setLayout(new BoxLayout(container, BoxLayout.Y_AXIS));
+        container.setLayout(new GridBagLayout());
+        container.setBackground(Color.DARK_GRAY);
 
-        numberPanel = new JPanel(new GridLayout(6,3));
-        for(JButton button:numberButtons){
-            button.setVisible(true);
-            numberPanel.add(button);
+        numberPanel = new JPanel(new GridBagLayout());
+        numberPanel.setBackground(Color.DARK_GRAY);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(7,7,7,7);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        numberPanel.add(numberButtons.get(2),gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        numberPanel.add(numberButtons.get(1),gbc);
+
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        numberPanel.add(numberButtons.get(0),gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        numberPanel.add(numberButtons.get(5),gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        numberPanel.add(numberButtons.get(4),gbc);
+
+        gbc.gridx = 2;
+        gbc.gridy = 1;
+        numberPanel.add(numberButtons.get(3),gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        numberPanel.add(numberButtons.get(8),gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        numberPanel.add(numberButtons.get(7),gbc);
+
+        gbc.gridx = 2;
+        gbc.gridy = 2;
+        numberPanel.add(numberButtons.get(6),gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        numberPanel.add(numberButtons.get(9),gbc);
+
+
+        operatorPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints g = new GridBagConstraints();
+        operatorPanel.setBackground(Color.DARK_GRAY);
+        g.insets = new Insets(7,7,7,7);
+        for(int i = 0; i < operatorButtons.size(); i++){
+            JButton but = operatorButtons.get(i);
+            but.setBackground(Color.getHSBColor(0.7f, 0.4f, 0.8f));
+            but.setVisible(true);
+            g.gridy = 0;
+            g.gridx = i;
+            operatorPanel.add(but,g);
         }
 
-        operatorPanel = new JPanel(new GridLayout(3,4));
-        for(JButton button:operatorButtons){
-            button.setVisible(true);
-            operatorPanel.add(button);
-        }
-
-        utilPanel = new JPanel(new GridLayout(2,4));
-        for(JButton button:utilButtons){
-            button.setVisible(true);
-            numberPanel.add(button);
+        utilPanel = new JPanel(new GridBagLayout());
+        utilPanel.setBackground(Color.DARK_GRAY);
+        GridBagConstraints c = new GridBagConstraints();
+        c.insets = new Insets(1,1,1,1);
+        for(int i = 0; i< utilButtons.size(); i++) {
+            JButton but = utilButtons.get(i);
+            but.setBackground(Color.LIGHT_GRAY);
+            but.setVisible(true);
+            c.gridy = 0;
+            c.gridx = i;
+            utilPanel.add(but,c);
         }
 
 
@@ -64,12 +123,19 @@ public class CalculatorFrame extends JFrame implements ActionListener{
         screen.setFont(font);
 
 
-        container.add(screen);
-        container.add(numberPanel);
-        container.add(operatorPanel);
-        container.add(utilPanel);
-
-
+        GridBagConstraints cons = new GridBagConstraints();
+        cons.gridx = 0;
+        cons.gridy = 0;
+        container.add(screen, cons);
+        cons.gridx = 0;
+        cons.gridy = 1;
+        container.add(utilPanel, cons);
+        cons.gridx = 0;
+        cons.gridy = 2;
+        container.add(operatorPanel, cons);
+        cons.gridx = 0;
+        cons.gridy = 3;
+        container.add(numberPanel, cons);
 
         this.add(container);
     }
@@ -77,9 +143,10 @@ public class CalculatorFrame extends JFrame implements ActionListener{
     public void createButtons(){
         // Numbers 0-9
         JButton button;
-        for(int i=0;i<10;i++){
+        for(int i=9;i>=0;i--){
             button= new NumberButton(Integer.toString(i));
             button.addActionListener(this);
+            button.setBackground(Color.GRAY);
             numberButtons.add(button);
         }
 
