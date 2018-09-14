@@ -2,7 +2,7 @@ import javax.swing.*;
 
 public class OperatorButton extends JButton {
 
-    public enum OPERATOR_TYPE{ADD,MULTIPLY,SUBTRACT,DIVIDE,DOT}
+    public enum OPERATOR_TYPE{ADD,MULTIPLY,SUBTRACT,DIVIDE}
 
     OPERATOR_TYPE type;
 
@@ -24,9 +24,7 @@ public class OperatorButton extends JButton {
             case DIVIDE:
                 this.setText("/");
                 break;
-            case DOT:
-                this.setText(".");
-                break;
+
         }
     }
 
