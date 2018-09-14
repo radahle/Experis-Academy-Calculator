@@ -9,6 +9,7 @@ public class CalculatorBrain {
     private OperatorButton.OPERATOR_TYPE lastType;
     private float memory = 0f;
     private String output = "";
+    private boolean recentClear = true;
 
     public CalculatorBrain(){}
 
@@ -16,14 +17,16 @@ public class CalculatorBrain {
     public String update(JButton button){
 //        output = "";
 
+
         if (button instanceof NumberButton){
+            recentClear=false;
             // check if it is a number
             if(numberStream.length()<MAX_INT) numberStream+=((NumberButton) button).getNumber();
             numbers[counter] = Float.parseFloat(numberStream);
             System.out.println(numbers[0] + " " +numbers[1] + " " + counter);
             output = Float.toString(numbers[counter]);
          }
-         else if (button instanceof OperatorButton){
+         else if (button instanceof OperatorButton && !recentClear){
             // Not a number then it is a string;
              // Or the number is too Large!
 
@@ -39,17 +42,19 @@ public class CalculatorBrain {
             lastType=((OperatorButton) button).getType();
 
 
-         } else if (button instanceof UtilButton) {
-             output = utilAction(((UtilButton) button).getType());
+         } else if (button instanceof UtilButton && !recentClear) {
+             utilAction(((UtilButton) button).getType());
         }
 
          return output;
     }
 
     public void clear(){
+        recentClear=true;
         counter=0;
         numberStream="";
         lastType= null;
+        output="";
         for(int i=0;i<numbers.length;i++){
             numbers[i]=0;
         }
@@ -126,8 +131,11 @@ public class CalculatorBrain {
         return output;
     }
 
-    public String utilAction(UtilButton.UTILITY_TYPE type){
-        String output="";
+    public void utilAction(UtilButton.UTILITY_TYPE type){
+        //String output="";
+
+
+
         switch (type){
 
             case EQUALS:
@@ -159,7 +167,7 @@ public class CalculatorBrain {
                 break;
         }
 
-        return output;
+        //return output;
     }
 
 }
