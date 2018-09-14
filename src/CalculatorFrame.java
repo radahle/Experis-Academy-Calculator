@@ -37,6 +37,7 @@ public class CalculatorFrame extends JFrame implements ActionListener{
         screen.setPreferredSize(new Dimension(350,100));
         screen.setBackground(Color.GRAY);
         screen.setHorizontalAlignment(JTextField.CENTER);
+        screen.setEnabled(false);
     }
 
     public void setLayout(){
