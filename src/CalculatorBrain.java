@@ -4,8 +4,8 @@ public class CalculatorBrain {
 
     private String numberStream = new String();
     private final byte MAX_INT=9;
-    private int[] numbers = new int[2];
-    private int counter = 0;
+    private float[] numbers = new float[2];
+    private  int counter = 0;
     private OperatorButton.OPERATOR_TYPE lastType;
     private float memory = 0f;
     private String output = "";
@@ -16,20 +16,19 @@ public class CalculatorBrain {
     public String update(JButton button){
 //        output = "";
 
-        if (button instanceof IntButton){
+        if (button instanceof NumberButton){
             // check if it is a number
-            if(numberStream.length()<MAX_INT) numberStream+=((IntButton) button).getInteger();
-            numbers[counter] = Integer.parseInt(numberStream);
-            System.out.println(numbers[0] + " " +numbers[1] + " " + counter + " Memory: " + memory);
-            output = Integer.toString(numbers[counter]);
-
+            if(numberStream.length()<MAX_INT) numberStream+=((NumberButton) button).getNumber();
+            numbers[counter] = Float.parseFloat(numberStream);
+            System.out.println(numbers[0] + " " +numbers[1] + " " + counter);
+            output = Float.toString(numbers[counter]);
          }
          else if (button instanceof OperatorButton){
             // Not a number then it is a string;
              // Or the number is too Large!
 
              numberStream="";
-             output=Integer.toString(numbers[0]);
+             output=Float.toString(numbers[0]);
 
              if (counter==1 && lastType != null){
                  calculate(lastType);
@@ -56,31 +55,31 @@ public class CalculatorBrain {
         }
     }
 
-    public int add(){
+    public float add(){
         numbers[0]=numbers[1]+numbers[0];
         numbers[1]=0;
         counter=1;
         return numbers[0];
     }
 
-    public int multiply(){
+    public float multiply(){
         numbers[0]=numbers[1]*numbers[0];
         numbers[1]=0;
-        counter=1;
+        counter=0;
         return numbers[0];
     }
 
-    public int subtract(){
+    public float subtract(){
         numbers[0]=numbers[0]-numbers[1];
         numbers[1]=0;
         counter=1;
         return numbers[0];
     }
 
-    public int divide(){
+    public float divide(){
         numbers[0]=numbers[0]/numbers[1];
         numbers[1]=0;
-        counter=1;
+        counter=0;
         return numbers[0];
     }
 
@@ -102,9 +101,9 @@ public class CalculatorBrain {
         return memory;
     }
 
-    public int calculate(OperatorButton.OPERATOR_TYPE type){
+    public float calculate(OperatorButton.OPERATOR_TYPE type){
 
-        int output=0;
+        float  output=0;
 
         switch (type){
 
@@ -120,6 +119,7 @@ public class CalculatorBrain {
             case DIVIDE:
                 output  =   divide();
                 break;
+
         }
 
         return output;
@@ -131,9 +131,10 @@ public class CalculatorBrain {
 
             case EQUALS:
                 if(counter == 1) {
-                    output = Integer.toString(calculate(lastType));
-                    numbers[0] = 0;
-                    numbers[1] = 0;
+                    float result = calculate(lastType);
+                    output = Float.toString(result);
+                    numbers[0] = result;
+                    numbers[1] = 0f;
                     counter = 0;
                     numberStream = "";
                     lastType = null;
