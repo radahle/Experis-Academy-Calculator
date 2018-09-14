@@ -18,8 +18,8 @@ public class CalculatorFrame extends JFrame implements ActionListener{
     private CalculatorBrain calcBrain= new CalculatorBrain();
 
 
-    private final short WIDTH_CONST =280;
-    private final short HEIGHT_CONST =400;
+    private final short WIDTH_CONST =350;
+    private final short HEIGHT_CONST =450;
 
     public CalculatorFrame(){
         setSize(WIDTH_CONST,HEIGHT_CONST);
@@ -34,7 +34,7 @@ public class CalculatorFrame extends JFrame implements ActionListener{
 
         setVisible(true);
         screen.setText("0");
-        screen.setPreferredSize(new Dimension(280,100));
+        screen.setPreferredSize(new Dimension(350,100));
         screen.setBackground(Color.GRAY);
         screen.setHorizontalAlignment(JTextField.RIGHT);
     }
@@ -107,7 +107,7 @@ public class CalculatorFrame extends JFrame implements ActionListener{
         utilPanel = new JPanel(new GridBagLayout());
         utilPanel.setBackground(Color.DARK_GRAY);
         GridBagConstraints c = new GridBagConstraints();
-        c.insets = new Insets(5,5,5,5);
+        c.insets = new Insets(1,1,1,1);
         for(int i = 0; i< utilButtons.size(); i++) {
             JButton but = utilButtons.get(i);
             but.setBackground(Color.LIGHT_GRAY);
@@ -143,7 +143,7 @@ public class CalculatorFrame extends JFrame implements ActionListener{
     public void createButtons(){
         // Numbers 0-9
         JButton button;
-        for(int i=0;i<10;i++){
+        for(int i=9;i>=0;i--){
             button= new NumberButton(Integer.toString(i));
             button.addActionListener(this);
             button.setBackground(Color.GRAY);

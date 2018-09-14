@@ -1,7 +1,7 @@
 import javax.swing.*;
 
 public class UtilButton extends JButton {
-    public enum UTILITY_TYPE{EQUALS,CLEAR,M_PLUSS,M_MINUS, M_CLEAR, M_RECALL}
+    public enum UTILITY_TYPE{CLEAR,M_PLUSS,M_MINUS, M_CLEAR, M_RECALL, EQUALS}
 
     public UTILITY_TYPE getType() {
         return type;
