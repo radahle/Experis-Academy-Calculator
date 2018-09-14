@@ -65,7 +65,7 @@ public class CalculatorBrain {
     public float multiply(){
         numbers[0]=numbers[1]*numbers[0];
         numbers[1]=0;
-        counter=0;
+        counter=1;
         return numbers[0];
     }
 
@@ -79,7 +79,7 @@ public class CalculatorBrain {
     public float divide(){
         numbers[0]=numbers[0]/numbers[1];
         numbers[1]=0;
-        counter=0;
+        counter=1;
         return numbers[0];
     }
 
@@ -119,6 +119,7 @@ public class CalculatorBrain {
             case DIVIDE:
                 output  =   divide();
                 break;
+
 
         }
 
